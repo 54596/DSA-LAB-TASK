@@ -1,0 +1,131 @@
+
+//QUESTION#1
+#include <iostream>
+class Queue {
+private:
+ int queue[10];
+ int front;
+ int rear;
+ int size;
+public:
+ Queue() {
+ front = rear = -1;
+ size = 0;
+ }
+ void enqueue(int data) {
+ if (size == 10) {
+ cout << "Queue is full." << endl;
+ return;
+ }
+ if (rear == -1) {
+ front = rear = 0;
+ } else {
+ rear = rear + 1;
+ if (rear == 10) {
+ rear = 0;
+ }
+ }
+ queue[rear] = data;
+ size++;
+ }
+ int dequeue() {
+ if (size == 0) {
+ cout << "Queue is empty." << endl;
+ return -1;
+ }
+ int data = queue[front];
+ if (front == rear) {
+ front = rear = -1;
+ } else {
+ front = front + 1;
+ if (front == 10) {
+ front = 0;
+ }
+ }
+ size--;
+ return data;
+ }
+ void display() {
+ if (size == 0) {
+ cout << "Queue is empty." << endl;
+ return;
+ }
+ for (int i = 0; i < size; i++) {
+ cout << queue[front + i] << " ";
+ if (front + i == 10) {
+ cout << queue[i] << " ";
+ }
+ }
+ cout <<endl;
+ }
+};
+int main() {
+ Queue q;
+ q.enqueue(1);
+ q.enqueue(2);
+ q.enqueue(3);
+ q.enqueue(4);
+ q.enqueue(5);
+ q.display();
+ cout << "Dequeued: " << q.dequeue() << endl;
+ cout << "Dequeued: " << q.dequeue() << endl;
+ q.display();
+ q.enqueue(6);
+ q.enqueue(7);
+ q.enqueue(8);
+ q.enqueue(9);
+ q.enqueue(10);
+ q.display();
+ return 0;
+}
+
+//QUESTION#2
+#include <iostream>
+using namespace std;
+class Queue {
+private:
+ char queue[100];
+ int front;
+ int rear;
+ int size;
+public:
+ Queue() {
+ front = rear = -1;
+ size = 0;
+ }
+ void enqueue(char data) {
+ if (size == 100) return;
+ if (rear == -1) front = rear = 0;
+ else rear = (rear + 1) % 100;
+ queue[rear] = data;
+ size++;
+ }
+ char dequeue() {
+ if (size == 0) return -1;
+ char data = queue[front];
+ if (front == rear) front = rear = -1;
+ else front = (front + 1) % 100;
+ size--;
+ return data;
+ }
+ int getSize() {
+ return size;
+ }
+};
+int main() {
+ string input;
+ cout << "Enter a string: ";
+ getline(cin, input);
+ Queue result;
+ for (char c : input) {
+ if (c != ' ') {
+ result.enqueue(c);
+ }
+ }
+ cout << "Concatenated queue: ";
+ while (result.getSize() > 0) {
+ cout << result.dequeue() << " ";
+ }
+ cout << endl;
+ return 0;
+}
