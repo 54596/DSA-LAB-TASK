@@ -1,0 +1,76 @@
+Name: Basit Ali
+SAP: 54596
+#include <iostream>
+using namespace std;
+struct Element {
+ int value;
+ Element* nextElement;
+};
+class SimpleQueue {
+ Element* head;
+ Element* tail;
+ int count;
+ static const int MAX_CAPACITY = 10;
+public:
+ SimpleQueue() : head(NULL), tail(NULL), count(0) {}
+ void add(int value) {
+ if (count < MAX_CAPACITY) {
+ Element* newElement = new Element;
+ newElement->value = value;
+ newElement->nextElement = NULL;
+ cout << value << " has been added to the queue!" << endl;
+ if (head == NULL) {
+ head = tail = newElement;
+ } else {
+ tail->nextElement = newElement;
+ tail = newElement;
+ }
+ count++;
+ } else {
+ cout << "\nQueue is full. Cannot add more items." << endl;
+ }
+ }
+ void remove() {
+ if (head == NULL) {
+ cout << "\n **Queue is empty. Nothing to remove.** " << endl;
+ return;
+ }
+ Element* tempElement = head;
+ head = head->nextElement;
+ delete tempElement;
+ count--;
+ }
+ void clear() {
+ while (head != NULL) {
+ remove();
+ }
+ cout << "\nQueue has been cleared." << endl;
+ }
+ void show() {
+ if (head == NULL) {
+ cout << "\n **Queue is empty** " << endl;
+ return;
+ }
+ cout << "Current Queue: ";
+ Element* tempElement = head;
+ while (tempElement != NULL) {
+ cout << tempElement->value << " ";
+ tempElement = tempElement->nextElement;
+ }
+ cout << endl << "Total elements in the queue: " << count << endl;
+ }
+};
+int main() {
+ cout << "\t *** Simple Queue Implementation *** " << endl << endl;
+ SimpleQueue queue;
+ for (int i = 1; i <= 10; i++) {
+ queue.add(i);
+ }
+ queue.show();
+ queue.remove();
+ queue.remove();
+ queue.show();
+ queue.clear();
+ queue.show();
+ return 0;
+}
