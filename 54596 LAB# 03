@@ -1,0 +1,271 @@
+Name: Basit Ali
+SAP: 54596
+LAB# 03
+QUESTION#1
+#include <iostream>
+using namespace std;
+int main() {
+ int rows, cols;
+ cout << "Enter the number of rows: ";
+ cin >> rows;
+ cout << "Enter the number of columns: ";
+ cin >> cols;
+ int arr[rows][cols];
+ int sum = 0;
+ int product = 1;
+ int totalElements = rows * cols;
+ cout << "Enter the elements of the 2D array:" << endl;
+ for (int i = 0; i < rows; ++i) {
+ for (int j = 0; j < cols; ++j) {
+ cin >> arr[i][j];
+ sum += arr[i][j];
+ product *= arr[i][j];
+ }
+ }
+ double average = static_cast<double>(sum) / totalElements;
+ cout << "Sum: " << sum << endl;
+ cout << "Product: " << product << endl;
+ cout << "Average: " << average << endl;
+ return 0;
+}
+
+//QUESTION#2
+#include <iostream>
+using namespace std;
+void swap(int *a, int *b) {
+ int temp = *a;
+ *a = *b;
+ *b = temp;
+}
+int main() {
+ int x, y;
+ cout << "Enter two integers: ";
+ cin >> x >> y;
+ swap(&x, &y);
+ cout << "After swapping: x = " << x << ", y = " << y << endl;
+ return 0;
+}
+
+//QUESTION#3
+#include <iostream>
+using namespace std;
+int main() {
+ const int SIZE = 10;
+ int arr[SIZE];
+ int largest, smallest;
+ cout << "Enter 10 values:" << endl;
+ // Initialize largest and smallest with the first value
+ cin >> arr[0];
+ largest = smallest = arr[0];
+ // Process the rest of the array
+ for (int i = 1; i < SIZE; ++i) {
+ cin >> arr[i];
+ if (arr[i] > largest) largest = arr[i];
+ if (arr[i] < smallest) smallest = arr[i];
+ }
+ cout << "Largest value: " << largest << endl;
+ cout << "Smallest value: " << smallest << endl;
+ return 0;
+}
+
+//QUESTION#4
+#include <iostream>
+using namespace std;
+int main() {
+ const int MONTHS = 12;
+ double rainfall[MONTHS];
+ double totalRainfall = 0;
+ double highest, lowest;
+ // Initialize highest and lowest with the first month's value
+ cout << "Enter the total rainfall for each of the 12 months:" << endl;
+ cin >> rainfall[0];
+ totalRainfall = highest = lowest = rainfall[0];
+ // Process the rest of the months
+ for (int i = 1; i < MONTHS; ++i) {
+ cin >> rainfall[i];
+ totalRainfall += rainfall[i];
+
+ if (rainfall[i] > highest) highest = rainfall[i];
+ if (rainfall[i] < lowest) lowest = rainfall[i];
+ }
+ double averageRainfall = totalRainfall / MONTHS;
+ // Find the month with highest and lowest rainfall
+ int highestMonth = 0;
+ int lowestMonth = 0;
+ for (int i = 0; i < MONTHS; ++i) {
+ if (rainfall[i] == highest) highestMonth = i;
+ if (rainfall[i] == lowest) lowestMonth = i;
+ }
+ cout << "Total rainfall for the year: " << totalRainfall << endl;
+ cout << "Average monthly rainfall: " << averageRainfall << endl;
+ cout << "Month with highest rainfall: " << highestMonth + 1 << " (" << highest << ")" << endl;
+ cout << "Month with lowest rainfall: " << lowestMonth + 1 << " (" << lowest << ")" << endl;
+ return 0;
+}
+
+
+//QUESTION#5
+#include <iostream>
+using namespace std;
+const int ROWS = 3;
+const int COLS = 3;
+int main() {
+ int arr[ROWS][COLS] = {
+ {1, 2, 3},
+ {4, 5, 6},
+ {7, 8, 9}
+ };
+ int total = 0;
+ int rowTotal = 0;
+ int colTotal = 0;
+ int highestInRow = arr[1][0];
+ int highestInCol = arr[0][2];
+ cout << "Array contents:" << endl;
+ for (int i = 0; i < ROWS; ++i) {
+ for (int j = 0; j < COLS; ++j) {
+ cout << arr[i][j] << " ";
+ total += arr[i][j];
+ if (i == 1) rowTotal += arr[i][j];
+ if (j == 2) colTotal += arr[i][j];
+ if (i == 1 && arr[i][j] > highestInRow) highestInRow = arr[i][j];
+ if (j == 2 && arr[i][j] > highestInCol) highestInCol = arr[i][j];
+ }
+ cout << endl;
+ }
+ double average = static_cast<double>(total) / (ROWS * COLS);
+ cout << "Total of all elements: " << total << endl;
+ cout << "Average of all elements: " << average << endl;
+ cout << "Total of row 1: " << rowTotal << endl;
+ cout << "Total of column 2: " << colTotal << endl;
+ cout << "Highest in row 1: " << highestInRow << endl;
+ cout << "Highest in column 2: " << highestInCol << endl;
+ return 0;
+}
+
+//QUESTION#6
+#include <iostream>
+using namespace std;
+int main() {
+ int n;
+ cout << "Enter the number of integers: ";
+ cin >> n;
+ int *arr = new int[n];
+ int sumOdd = 0;
+ cout << "Enter " << n << " integers:" << endl;
+ for (int i = 0; i < n; ++i) {
+ cin >> arr[i];
+ if (arr[i] % 2 != 0) {
+ sumOdd += arr[i];
+ }
+ }
+ cout << "Sum of odd integers: " << sumOdd << endl;
+ delete[] arr;
+ return 0;
+}
+
+
+//QUESTION#7
+#include <iostream>
+using namespace std;
+int main() {
+int value = 10;
+int *ptr = &value;
+cout << "Value: " << value << endl;
+cout << "Pointer points to value: " << *ptr << endl;
+return 0;
+}
+
+
+
+//QUESTION#8
+#include <iostream>
+using namespace std;
+int main() {
+ int a, b;
+ int *ptrA, *ptrB;
+ cout << "Enter two integers:" << endl;
+ cin >> a >> b;
+ ptrA = &a;
+ ptrB = &b;
+ cout << "Value of a through pointer ptrA: " << *ptrA << endl;
+ cout << "Value of b through pointer ptrB: " << *ptrB << endl;
+ return 0;
+}
+
+
+
+
+
+
+//QUESTION#9
+#include <iostream>
+#include <cmath> // For pow function
+using namespace std;
+void Menu() {
+ cout << "Calculator Menu:" << endl;
+ cout << "1. Addition" << endl;
+ cout << "2. Subtraction" << endl;
+ cout << "3. Multiplication" << endl;
+ cout << "4. Division" << endl;
+ cout << "5. Power" << endl;
+ cout << "Enter your choice: ";
+}
+int Addition(int a, int b) {
+ return a + b;
+}
+int Subtraction(int a, int b) {
+ return a - b;
+}
+int Multiplication(int a, int b) {
+ return a * b;
+}
+double Division(int a, int b) {
+ if (b == 0) {
+ cout << "Error: Division by zero is not allowed." << endl;
+ return 0; // Handle division by zero
+ }
+ return static_cast<double>(a) / b;
+}
+double Power(int base, int exp) {
+ return pow(base, exp);
+}
+int main() {
+ int choice;
+ int num1, num2;
+
+ while (true) {
+ Menu();
+ cin >> choice;
+ // Exit if the user chooses 0
+ if (choice == 0) {
+ cout << "Exiting the program." << endl;
+ break;
+ }
+ // Input numbers
+ cout << "Enter two numbers: ";
+ cin >> num1 >> num2;
+ switch (choice) {
+ case 1:
+ cout << "Result: " << Addition(num1, num2) << endl;
+ break;
+ case 2:
+ cout << "Result: " << Subtraction(num1, num2) << endl;
+ break;
+ case 3:
+ cout << "Result: " << Multiplication(num1, num2) << endl;
+ break;
+ case 4:
+ cout << "Result: " << Division(num1, num2) << endl;
+ break;
+ case 5:
+ cout << "Enter the exponent: ";
+ int exp;
+ cin >> exp;
+ cout << "Result: " << Power(num1, exp) << endl;
+ break;
+ default:
+ cout << "Invalid choice, please try again." << endl;
+ }
+ }
+ return 0;
+}
