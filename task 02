@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+int main() {
+ int ages[10]; // array to store age of users
+ cout << "Enter age of 10 students: ";
+ cin >> ages[0];
+ for(int i = 1; i < 10; i++) {
+ std::cin >> ages[i];
+ if(ages[i] > ages[0]) {
+ ages[0] = ages[i];
+ }
+ }
+ cout << "The largest age is: " << ages[0] << std::endl;
+ return 0;
+}
+
+
+
+//QUESTION#2
+#include <iostream>
+using namespace std;
+int main() {
+ int size;
+ cout << "Enter the size of the arrays: ";
+ cin >> size;
+ int arr1[size], arr2[size], arr3[size], sumArr[size];
+ cout << "Enter elements for arr1, arr2, arr3: ";
+ for(int i = 0; i < size; i++) {
+ cin >> arr1[i] >> arr2[i] >> arr3[i];
+ sumArr[i] = arr1[i] + arr2[i] + arr3[i];
+ }
+ cout << "Sum array: ";
+ for(int i = 0; i < size; i++) {
+ std::cout << sumArr[i] << " ";
+ }
+ cout << std::endl;
+ return 0;
+}
+
+
+
+
+//QUESTION#3
+#include <iostream>
+using namespace std;
+int main() {
+ int size;
+ cout << "Enter the number of elements: ";
+ cin >> size;
+ int arr[size]; // Simple array declaration
+ cout << "Enter " << size << " elements: ";
+ for(int i = 0; i < size; i++) {
+ cin >> arr[i];
+ }
+ int item;
+ cout << "Enter the item to search: ";
+ cin >> item;
+ int index = -1;
+ for(int i = 0; i < size; i++) {
+ if(arr[i] == item) {
+ index = i;
+ break;
+ }
+ }
+ if(index != -1) {
+ cout << "Item found at index " << index << endl;
+ }
+ else {
+ cout << "Item not found in the array." << endl;
+ }
+ return 0;
+}
