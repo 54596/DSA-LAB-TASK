@@ -1,0 +1,108 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for linked list
+struct Node {
+    string name;
+    string sap_id;
+    Node* next;
+};
+
+// Head of the linked list
+Node* head = NULL;
+
+// Function to insert a new student into the linked list
+void insert(string name, string sap_id) {
+    Node* newNode = new Node();
+    newNode->name = name;
+    newNode->sap_id = sap_id;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode; // If the list is empty, set the new node as head
+    } else {
+        Node* temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next; // Traverse to the end of the list
+        }
+        temp->next = newNode; // Link the new node at the end
+    }
+}
+
+// Function to delete a node at a specified position
+void deleteNode(int position) {
+    if (head == NULL) {
+        cout << "List is empty." << endl;
+        return;
+    }
+    
+    Node* current = head;
+
+    // Deleting the head node
+    if (position == 1) {
+        head = head->next;
+        delete current;
+        return;
+    }
+
+    Node* prev = NULL;
+    int count = 1;
+
+    // Traverse to the position of the node to be deleted
+    while (current != NULL && count < position) {
+        prev = current;
+        current = current->next;
+        count++;
+    }
+
+    // If the position is invalid
+    if (current == NULL) {
+        cout << "Invalid position." << endl;
+        return;
+    }
+
+    // Unlink the node from the linked list and delete it
+    prev->next = current->next;
+    delete current;
+}
+
+// Function to display the linked list
+void display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << "Name: " << temp->name << "\t SAP ID: " << temp->sap_id << endl;
+        temp = temp->next; // Move to the next node
+    }
+}
+
+// Main function
+int main() {
+    int n;
+    cout << "How many students are there? ";
+    cin >> n;
+
+    // Check if the number of students is at least 5
+    if (n < 5) {
+        cout << "Number of inputs should be at least 5." << endl;
+        return 0; // Terminate the program if the condition does not match
+    }
+
+    // Input student details
+    for (int i = 0; i < n; i++) {
+        string name, sap_id;
+        cout << "Enter name for student " << i + 1 << ": ";
+        cin >> name;
+        cout << "Enter SAP ID for student " << i + 1 << ": "; // Fixed prompt here
+        cin >> sap_id;
+        insert(name, sap_id);
+    }
+
+    // Delete the 2nd and 5th students
+    deleteNode(2);
+    deleteNode(4); // Adjusted to delete the 5th student after the 2nd is deleted
+
+    cout << "\n\tUpdated linked list: " << endl;
+    display(); // Display the updated linked list
+
+    return 0;
+}
